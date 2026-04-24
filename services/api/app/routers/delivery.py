@@ -23,6 +23,8 @@ def track_delivery(order_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Order not found")
 
     status_info = get_delivery_status(order.status)
+    if order.status not in _ALL_STEPS:
+        raise HTTPException(status_code=400, detail=f"Cannot track delivery for order status: {order.status.value}")
     current_index = _ALL_STEPS.index(order.status)
 
     steps = [
