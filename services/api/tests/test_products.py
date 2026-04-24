@@ -45,6 +45,16 @@ def test_get_product_by_id(client, sample_product):
     assert len(data["sizes"]) == 4
 
 
+def test_list_products_filter_by_color(client, sample_product):
+    response = client.get("/products?color=negro")
+    assert response.status_code == 200
+    assert len(response.json()) == 1
+
+    response = client.get("/products?color=rojo")
+    assert response.status_code == 200
+    assert len(response.json()) == 0
+
+
 def test_get_product_not_found(client):
     response = client.get("/products/99999")
     assert response.status_code == 404
