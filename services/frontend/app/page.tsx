@@ -1,65 +1,66 @@
-import Image from "next/image";
+import Link from "next/link";
+import { api } from "@/lib/api";
+import { StoreCard } from "@/components/StoreCard";
+import { ProductCard } from "@/components/ProductCard";
+import { Button } from "@/components/ui/button";
 
-export default function Home() {
+export default async function HomePage() {
+  const [stores, products] = await Promise.all([
+    api.stores.list(),
+    api.products.list(),
+  ]);
+
+  const featuredStores = stores.filter((s) => s.is_featured);
+  const latestProducts = products.slice(0, 8);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="max-w-6xl mx-auto px-4 py-8 space-y-12">
+      {/* Hero */}
+      <section className="text-center space-y-4 py-12">
+        <h1 className="text-5xl font-bold tracking-tight">
+          Ropa de{" "}
+          <span className="text-emerald-400">Avellaneda</span>
+          <br />a tu puerta
+        </h1>
+        <p className="text-zinc-400 text-lg max-w-xl mx-auto">
+          Los mejores locales de Avellaneda, sin filas, sin colectivo, sin perder el día.
+          Elegí, pagá y recibilo hoy.
+        </p>
+        <Link href="/stores">
+          <Button size="lg" className="bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-bold">
+            Ver locales
+          </Button>
+        </Link>
+      </section>
+
+      {/* Featured stores */}
+      {featuredStores.length > 0 && (
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold">Locales destacados</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredStores.map((store) => (
+              <StoreCard key={store.id} store={store} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Latest products */}
+      {latestProducts.length > 0 && (
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold">Últimas novedades</h2>
+            <Link href="/stores" className="text-emerald-400 text-sm hover:underline">
+              Ver todo →
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {latestProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </section>
+      )}
+    </main>
   );
 }
