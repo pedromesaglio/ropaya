@@ -1,0 +1,8 @@
+[run]
+omit =
+    tests/*
+    app/main.py
+    alembic/*
+
+[report]
+fail_under = 80
