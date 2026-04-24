@@ -16,8 +16,13 @@ def create_payment_intent(order_id: int, db: Session = Depends(get_db)):
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
 
+    # Idempotency: if intent already created, return existing
+    if order.stripe_payment_intent_id:
+        intent = stripe.PaymentIntent.retrieve(order.stripe_payment_intent_id)
+        return {"client_secret": intent.client_secret, "payment_intent_id": intent.id}
+
     intent = stripe.PaymentIntent.create(
-        amount=int(order.total_amount * 100),  # Stripe uses cents
+        amount=round(order.total_amount * 100),  # Stripe uses cents
         currency="ars",
         metadata={"order_id": order.id},
     )
@@ -36,7 +41,7 @@ async def stripe_webhook(request: Request, db: Session = Depends(get_db)):
         event = stripe.Webhook.construct_event(
             payload, sig_header, settings.stripe_webhook_secret
         )
-    except Exception:
+    except (stripe.error.SignatureVerificationError, ValueError):
         raise HTTPException(status_code=400, detail="Invalid webhook signature")
 
     if event["type"] == "payment_intent.succeeded":

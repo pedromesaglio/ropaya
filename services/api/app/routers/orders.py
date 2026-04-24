@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 
 from app.database import get_db
 from app.models.order import Order, OrderItem
@@ -30,13 +30,14 @@ def create_order(payload: OrderCreate, db: Session = Depends(get_db)):
             )
         )
     db.commit()
-    db.refresh(order)
+    # Re-query with eager loading to avoid lazy loading issues
+    order = db.query(Order).options(selectinload(Order.items)).filter(Order.id == order.id).first()
     return order
 
 
 @router.get("/{order_id}", response_model=OrderRead)
 def get_order(order_id: int, db: Session = Depends(get_db)):
-    order = db.query(Order).filter(Order.id == order_id).first()
+    order = db.query(Order).options(selectinload(Order.items)).filter(Order.id == order_id).first()
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
     return order
