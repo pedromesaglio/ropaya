@@ -52,3 +52,25 @@ def test_advance_from_on_the_way_to_delivered():
 def test_advance_from_delivered_stays_delivered():
     next_status = advance_delivery_status(OrderStatus.DELIVERED)
     assert next_status == OrderStatus.DELIVERED
+
+
+def test_get_delivery_tracking(client, sample_product, sample_user):
+    order_payload = {
+        "user_id": sample_user.id,
+        "delivery_address": "Corrientes 1234, CABA",
+        "items": [{"product_id": sample_product.id, "size": "M", "quantity": 1, "unit_price": 3500.0}],
+    }
+    order = client.post("/orders", json=order_payload).json()
+
+    response = client.get(f"/delivery/{order['id']}/track")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["order_id"] == order["id"]
+    assert data["status"] == "pending"
+    assert data["message"] == "Esperando confirmación de pago"
+    assert "steps" in data
+
+
+def test_get_delivery_tracking_not_found(client):
+    response = client.get("/delivery/99999/track")
+    assert response.status_code == 404
