@@ -6,6 +6,12 @@ from sqlalchemy.orm import sessionmaker
 from app.database import Base, get_db
 from app.main import app
 
+# Import all models so Base.metadata is fully populated before create_all
+from app.models import store as _store_model  # noqa: F401
+from app.models import product as _product_model  # noqa: F401
+from app.models import user as _user_model  # noqa: F401
+from app.models import order as _order_model  # noqa: F401
+
 TEST_DATABASE_URL = "sqlite:///./test.db"
 
 engine = create_engine(TEST_DATABASE_URL, connect_args={"check_same_thread": False})
