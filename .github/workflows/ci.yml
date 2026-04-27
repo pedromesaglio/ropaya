@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd services/api
-          pip install -r requirements.txt
+          pip install -r requirements.txt -r requirements-dev.txt
 
       - name: Run tests with coverage
         env:
