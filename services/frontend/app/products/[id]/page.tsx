@@ -23,8 +23,8 @@ export default function ProductPage() {
   if (!product) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-8 animate-pulse space-y-4">
-        <div className="h-8 bg-zinc-800 rounded w-1/2" />
-        <div className="aspect-[4/5] bg-zinc-800 rounded max-w-sm" />
+        <div className="h-8 bg-muted rounded w-1/2" />
+        <div className="aspect-[4/5] bg-muted rounded max-w-sm" />
       </div>
     );
   }
@@ -44,12 +44,12 @@ export default function ProductPage() {
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="aspect-[4/5] relative bg-zinc-800 rounded-lg overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="aspect-[4/5] relative bg-muted rounded-2xl overflow-hidden">
           {product.image_url ? (
             <Image src={product.image_url} alt={product.name} fill className="object-cover" />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-zinc-600">
+            <div className="w-full h-full flex items-center justify-center text-muted-foreground">
               Sin foto
             </div>
           )}
@@ -57,13 +57,20 @@ export default function ProductPage() {
 
         <div className="space-y-6">
           <div className="space-y-2">
-            <p className="text-zinc-400 text-sm capitalize">{product.category}</p>
-            <h1 className="text-3xl font-bold">{product.name}</h1>
-            <p className="text-3xl font-bold text-emerald-400">{formattedPrice}</p>
+            <p className="text-muted-foreground text-sm capitalize tracking-widest uppercase text-xs">
+              {product.category}
+            </p>
+            <h1
+              className="text-3xl font-bold leading-tight"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              {product.name}
+            </h1>
+            <p className="text-4xl font-extrabold text-primary">{formattedPrice}</p>
           </div>
 
           {product.description && (
-            <p className="text-zinc-400">{product.description}</p>
+            <p className="text-muted-foreground leading-relaxed">{product.description}</p>
           )}
 
           <SizeTable
@@ -76,7 +83,7 @@ export default function ProductPage() {
             size="lg"
             onClick={handleAddToCart}
             disabled={!selectedSize}
-            className="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-bold disabled:opacity-40"
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl shadow-[0_0_20px_rgba(255,107,53,0.3)] hover:shadow-[0_0_28px_rgba(255,107,53,0.45)] transition-all disabled:opacity-40 disabled:shadow-none"
           >
             <ShoppingBag size={18} className="mr-2" />
             {added ? "¡Agregado!" : "Agregar al carrito"}
@@ -84,7 +91,7 @@ export default function ProductPage() {
 
           <Button
             variant="outline"
-            className="w-full border-zinc-700 text-zinc-300 hover:bg-zinc-800"
+            className="w-full border-border text-foreground hover:bg-muted rounded-xl"
             onClick={() => router.push("/cart")}
           >
             Ver carrito
