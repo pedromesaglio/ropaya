@@ -12,29 +12,29 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link href={`/products/${product.id}`}>
-      <Card className="bg-zinc-900 border-zinc-800 hover:border-zinc-600 transition-colors cursor-pointer overflow-hidden">
-        <div className="aspect-[4/5] relative bg-zinc-800">
+      <Card className="bg-card border-border hover:border-primary/40 transition-all duration-200 cursor-pointer overflow-hidden group hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,107,53,0.15)]">
+        <div className="aspect-[4/5] relative bg-muted overflow-hidden">
           {product.image_url ? (
             <Image
               src={product.image_url}
               alt={product.name}
               fill
-              className="object-cover"
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-zinc-600 text-sm">
+            <div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">
               Sin foto
             </div>
           )}
         </div>
-        <CardContent className="p-3 space-y-1">
-          <p className="text-zinc-50 font-medium text-sm line-clamp-1">{product.name}</p>
-          <p className="text-emerald-400 font-bold">{formattedPrice}</p>
+        <CardContent className="p-3 space-y-1.5">
+          <p className="text-foreground font-medium text-sm line-clamp-1">{product.name}</p>
+          <p className="text-primary font-bold">{formattedPrice}</p>
           <div className="flex gap-1 flex-wrap">
             {product.sizes.filter((s) => s.stock > 0).map((s) => (
               <span
                 key={s.size}
-                className="text-xs bg-zinc-800 text-zinc-300 px-1.5 py-0.5 rounded"
+                className="text-xs bg-muted text-muted-foreground px-1.5 py-0.5 rounded"
               >
                 {s.size}
               </span>
