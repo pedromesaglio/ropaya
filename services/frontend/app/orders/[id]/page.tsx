@@ -31,7 +31,6 @@ export default function OrderPage() {
         <CheckCircle size={52} className="text-primary mx-auto" />
         <h1
           className="text-3xl font-bold"
-          style={{ fontFamily: "var(--font-heading)" }}
         >
           ¡Pedido confirmado!
         </h1>

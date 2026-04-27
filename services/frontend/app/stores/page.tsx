@@ -11,7 +11,6 @@ export default async function StoresPage() {
       <div className="space-y-1">
         <h1
           className="text-3xl font-bold"
-          style={{ fontFamily: "var(--font-heading)" }}
         >
           Locales en Avellaneda
         </h1>

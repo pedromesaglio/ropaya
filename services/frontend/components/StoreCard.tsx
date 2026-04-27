@@ -10,7 +10,7 @@ export function StoreCard({ store }: { store: Store }) {
       <Card className="bg-card border-border hover:border-primary/40 transition-all duration-200 cursor-pointer h-full hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(255,107,53,0.12)]">
         <CardHeader>
           <div className="flex items-start justify-between gap-2">
-            <CardTitle className="text-foreground text-lg" style={{ fontFamily: "var(--font-heading)" }}>
+            <CardTitle className="text-foreground text-lg">
               {store.name}
             </CardTitle>
             <div className="flex gap-1 flex-shrink-0">

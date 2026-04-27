@@ -28,11 +28,10 @@ export default async function HomePage() {
         />
         <h1
           className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight"
-          style={{ fontFamily: "var(--font-heading)" }}
         >
           Ropa de{" "}
           <span
-            className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent"
+            className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
           >
             Avellaneda
           </span>
@@ -58,7 +57,6 @@ export default async function HomePage() {
         <section className="space-y-5">
           <h2
             className="text-2xl font-bold border-l-4 border-primary pl-3"
-            style={{ fontFamily: "var(--font-heading)" }}
           >
             Locales destacados
           </h2>
@@ -76,7 +74,6 @@ export default async function HomePage() {
           <div className="flex items-center justify-between">
             <h2
               className="text-2xl font-bold border-l-4 border-primary pl-3"
-              style={{ fontFamily: "var(--font-heading)" }}
             >
               Últimas novedades
             </h2>

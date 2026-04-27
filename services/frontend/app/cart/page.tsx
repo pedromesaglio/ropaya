@@ -18,7 +18,7 @@ export default function CartPage() {
     return (
       <main className="max-w-2xl mx-auto px-4 py-16 text-center space-y-4">
         <ShoppingBag size={48} className="text-muted-foreground/30 mx-auto" />
-        <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-heading)" }}>
+        <h1 className="text-2xl font-bold">
           Tu carrito está vacío
         </h1>
         <p className="text-muted-foreground">Explorá los locales y encontrá lo que buscás.</p>
@@ -33,7 +33,7 @@ export default function CartPage() {
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-8 space-y-6">
-      <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-heading)" }}>
+      <h1 className="text-3xl font-bold">
         Tu carrito
       </h1>
       <div>

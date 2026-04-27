@@ -79,7 +79,7 @@ export default function CheckoutPage() {
 
   return (
     <main className="max-w-lg mx-auto px-4 py-8 space-y-6">
-      <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-heading)" }}>
+      <h1 className="text-3xl font-bold">
         Checkout
       </h1>
 

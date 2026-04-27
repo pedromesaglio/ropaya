@@ -57,12 +57,11 @@ export default function ProductPage() {
 
         <div className="space-y-6">
           <div className="space-y-2">
-            <p className="text-muted-foreground text-sm capitalize tracking-widest uppercase text-xs">
+            <p className="text-muted-foreground text-xs uppercase tracking-widest">
               {product.category}
             </p>
             <h1
               className="text-3xl font-bold leading-tight"
-              style={{ fontFamily: "var(--font-heading)" }}
             >
               {product.name}
             </h1>
