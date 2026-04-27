@@ -17,11 +17,13 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <main className="max-w-2xl mx-auto px-4 py-16 text-center space-y-4">
-        <ShoppingBag size={48} className="text-zinc-700 mx-auto" />
-        <h1 className="text-2xl font-bold">Tu carrito está vacío</h1>
-        <p className="text-zinc-400">Explorá los locales y encontrá lo que buscás.</p>
+        <ShoppingBag size={48} className="text-muted-foreground/30 mx-auto" />
+        <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-heading)" }}>
+          Tu carrito está vacío
+        </h1>
+        <p className="text-muted-foreground">Explorá los locales y encontrá lo que buscás.</p>
         <Link href="/stores">
-          <Button className="bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-bold">
+          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl">
             Ver locales
           </Button>
         </Link>
@@ -31,18 +33,23 @@ export default function CartPage() {
 
   return (
     <main className="max-w-2xl mx-auto px-4 py-8 space-y-6">
-      <h1 className="text-3xl font-bold">Tu carrito</h1>
+      <h1 className="text-3xl font-bold" style={{ fontFamily: "var(--font-heading)" }}>
+        Tu carrito
+      </h1>
       <div>
         {items.map((item) => (
           <CartItem key={`${item.product.id}-${item.size}`} item={item} />
         ))}
       </div>
-      <div className="border-t border-zinc-800 pt-4 flex items-center justify-between">
+      <div className="border-t border-border pt-4 flex items-center justify-between">
         <span className="text-lg font-bold">Total</span>
-        <span className="text-2xl font-bold text-emerald-400">{formattedTotal}</span>
+        <span className="text-2xl font-bold text-primary">{formattedTotal}</span>
       </div>
       <Link href="/checkout">
-        <Button size="lg" className="w-full bg-emerald-500 hover:bg-emerald-400 text-zinc-900 font-bold">
+        <Button
+          size="lg"
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl shadow-[0_0_20px_rgba(255,107,53,0.3)] hover:shadow-[0_0_28px_rgba(255,107,53,0.45)] transition-all"
+        >
           Ir a pagar
         </Button>
       </Link>
