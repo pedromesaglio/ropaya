@@ -14,27 +14,27 @@ export function CartItem({ item }: { item: CartItemType }) {
   }).format(item.product.price * item.quantity);
 
   return (
-    <div className="flex gap-4 py-4 border-b border-zinc-800">
-      <div className="w-20 h-24 relative bg-zinc-800 rounded flex-shrink-0 overflow-hidden">
+    <div className="flex gap-4 py-4 border-b border-border">
+      <div className="w-20 h-24 relative bg-muted rounded-lg flex-shrink-0 overflow-hidden">
         {item.product.image_url ? (
           <Image src={item.product.image_url} alt={item.product.name} fill className="object-cover" />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-zinc-600 text-xs">
+          <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">
             Sin foto
           </div>
         )}
       </div>
       <div className="flex-1 space-y-1">
-        <p className="font-medium text-zinc-50">{item.product.name}</p>
-        <p className="text-zinc-400 text-sm">Talle: {item.size}</p>
-        <p className="text-zinc-400 text-sm">Cantidad: {item.quantity}</p>
-        <p className="text-emerald-400 font-bold">{formattedPrice}</p>
+        <p className="font-medium text-foreground">{item.product.name}</p>
+        <p className="text-muted-foreground text-sm">Talle: {item.size}</p>
+        <p className="text-muted-foreground text-sm">Cantidad: {item.quantity}</p>
+        <p className="text-primary font-bold">{formattedPrice}</p>
       </div>
       <Button
         variant="ghost"
         size="icon"
         onClick={() => removeItem(item.product.id, item.size)}
-        className="text-zinc-500 hover:text-red-400 flex-shrink-0"
+        className="text-muted-foreground hover:text-destructive flex-shrink-0"
       >
         <Trash2 size={16} />
       </Button>
