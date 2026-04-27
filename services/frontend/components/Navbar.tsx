@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 export function Navbar() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const items = useCart((s) => s.items);
   const [mounted, setMounted] = useState(false);
 
@@ -47,10 +47,10 @@ export function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
               className="text-muted-foreground hover:text-foreground"
             >
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              {resolvedTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
             </Button>
           )}
         </div>
