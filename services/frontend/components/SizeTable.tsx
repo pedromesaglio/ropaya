@@ -10,7 +10,7 @@ interface SizeTableProps {
 export function SizeTable({ sizes, selected, onSelect }: SizeTableProps) {
   return (
     <div className="space-y-2">
-      <p className="text-zinc-400 text-sm font-medium">Seleccioná tu talle</p>
+      <p className="text-muted-foreground text-sm font-medium">Seleccioná tu talle</p>
       <div className="flex flex-wrap gap-2">
         {sizes.map((s) => {
           const outOfStock = s.stock === 0;
@@ -21,12 +21,12 @@ export function SizeTable({ sizes, selected, onSelect }: SizeTableProps) {
               onClick={() => !outOfStock && onSelect(s.size)}
               disabled={outOfStock}
               className={`
-                px-4 py-2 rounded border text-sm font-medium transition-colors
+                px-4 py-2 rounded-xl border text-sm font-medium transition-all duration-150
                 ${outOfStock
-                  ? "border-zinc-800 text-zinc-700 cursor-not-allowed line-through"
+                  ? "border-border text-muted-foreground/40 cursor-not-allowed line-through"
                   : isSelected
-                  ? "border-zinc-50 bg-zinc-50 text-zinc-900"
-                  : "border-zinc-700 text-zinc-300 hover:border-zinc-400"
+                  ? "border-primary bg-primary text-primary-foreground shadow-[0_0_12px_rgba(255,107,53,0.4)]"
+                  : "border-border text-foreground hover:border-primary/60 hover:text-primary"
                 }
               `}
             >
