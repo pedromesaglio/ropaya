@@ -20,7 +20,7 @@ export function StoreCard({ store }: { store: Store }) {
                 </Badge>
               )}
               {store.is_featured && (
-                <Badge className="bg-amber-500 text-zinc-900 text-xs">Destacado</Badge>
+                <Badge className="bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs">Destacado</Badge>
               )}
             </div>
           </div>
